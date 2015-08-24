@@ -1,0 +1,28 @@
+{
+  "name": "abproxy",
+  "version": "0.0.1",
+  "description": "Inject A/B tests into a proxied server response.",
+  "main": "dist/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node dist/server.js"
+  },
+  "keywords": [
+    "proxy",
+    "A/B"
+  ],
+  "author": "casecode <casey.r.white@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "clearhead": "0.0.27",
+    "connect": "^3.4.0",
+    "harmon": "^1.3.1",
+    "http-proxy": "^1.11.1"
+  },
+  "devDependencies": {
+    "babel": "^5.8.21",
+    "babel-core": "^5.8.22",
+    "gulp": "^3.9.0",
+    "gulp-babel": "^5.2.1"
+  }
+}
