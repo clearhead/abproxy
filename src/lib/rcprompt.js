@@ -16,7 +16,7 @@ promzard(rcpromptInput, (err, config) => {
   }
 
   const out = path.resolve(process.cwd(), rcfile);
-  jsonfile.writeFile(out, { spaces: 2 }, config, (err) => {
+  jsonfile.writeFile(out, config, { spaces: 2 }, (err) => {
     if (err) process.send(err);
     process.exit(err ? 1 : 0);
   });
