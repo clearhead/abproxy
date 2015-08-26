@@ -2,10 +2,13 @@
   "name": "abproxy",
   "version": "0.0.1",
   "description": "Inject A/B tests into a proxied server response.",
-  "main": "dist/server.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node dist/server.js"
+    "start": "node dist/index.js"
+  },
+  "bin": {
+    "abproxy": "dist/index.js"
   },
   "keywords": [
     "proxy",
@@ -15,9 +18,14 @@
   "license": "MIT",
   "dependencies": {
     "clearhead": "0.0.27",
+    "commander": "^2.8.1",
     "connect": "^3.4.0",
     "harmon": "^1.3.1",
-    "http-proxy": "^1.11.1"
+    "http-proxy": "^1.11.1",
+    "jsonfile": "^2.2.1",
+    "livereload": "^0.3.7",
+    "promzard": "^0.3.0",
+    "rc": "^1.1.0"
   },
   "devDependencies": {
     "babel": "^5.8.21",
