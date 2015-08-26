@@ -18,6 +18,6 @@ app.use(proxyInjector('test/test.js'));
 
 app.use((req, res) => {
   proxy.web(req, res);
-);
+});
 
 http.createServer(app).listen(8000);
