@@ -15,6 +15,9 @@
     "A/B"
   ],
   "author": "casecode <casey.r.white@gmail.com>",
+  "contributors": [
+    "Tom Fuertes <tomfuertes@gmail.com>"
+  ],
   "license": "MIT",
   "dependencies": {
     "clearhead": "0.0.27",
