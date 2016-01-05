@@ -1,55 +1,55 @@
-import harmon from 'harmon';
-import loadFiles from './load-files';
+import harmon from 'harmon'
+import loadFiles from './load-files'
 
 function tagify(tag, contents) {
-  return `<${ tag }>${ contents }</${ tag }>`;
+  return `<${ tag }>${ contents }</${ tag }>`
 }
 
 // Generate harmon select to append contents to a query stream
 function generateHarmonSelect(selector, contents) {
-  const select = { query: selector };
+  const select = { query: selector }
 
   select.func = (node) => {
-    const stream = node.createStream({ 'outer' : true });
+    const stream = node.createStream({ 'outer' : true })
 
-    let innerHtml = '';
+    let innerHtml = ''
 
     stream.on('data', (data) => {
       innerHtml += data
-    });
+    })
 
     stream.on('end', () => {
-      stream.end(innerHtml + contents);
-    });
-  };
+      stream.end(innerHtml + contents)
+    })
+  }
 
-  return select;
+  return select
 }
 
 function appendFiles(files, tag, selector) {
-  const contents = files.map((file) => tagify(tag, file.contents)).join('');
+  const contents = files.map((file) => tagify(tag, file.contents)).join('')
 
-  return generateHarmonSelect(selector, contents);
+  return generateHarmonSelect(selector, contents)
 }
 
 function filterFilesByExt(files, ext) {
-  return files.filter(file => file.ext === ext);
+  return files.filter(file => file.ext === ext)
 }
 
 function proxyInjector(filepaths) {
   return (req, res, next) => {
     loadFiles(filepaths, (files) => {
-      const styles = filterFilesByExt(files, '.css');
-      const scripts = filterFilesByExt(files, '.js');
+      const styles = filterFilesByExt(files, '.css')
+      const scripts = filterFilesByExt(files, '.js')
 
-      const selects = [];
+      const selects = []
 
-      if (styles) selects.push(appendFiles(styles, 'style', 'head'));
-      if (scripts) selects.push(appendFiles(scripts, 'script', 'body'));
+      if (styles) selects.push(appendFiles(styles, 'style', 'head'))
+      if (scripts) selects.push(appendFiles(scripts, 'script', 'body'))
 
-      harmon([], selects)(req, res, next);
-    });
+      harmon([], selects)(req, res, next)
+    })
   }
 }
 
-export default proxyInjector;
+export default proxyInjector

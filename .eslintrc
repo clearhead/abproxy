@@ -1,0 +1,59 @@
+{
+  // http://eslint.org/docs/rules/
+
+  "ecmaFeatures": {
+    "arrowFunctions": true,                     // enable arrow functions
+    "binaryLiterals": false,                    // enable binary literals
+    "blockBindings": true,                      // enable let and const (aka block bindings)
+    "classes": true,                            // enable classes
+    "defaultParams": true,                      // enable default function parameters
+    "destructuring": true,                      // enable destructuring
+    "forOf": true,                              // enable for-of loops
+    "generators": true,                         // enable generators
+    "modules": true,                            // enable modules and global strict mode
+    "objectLiteralComputedProperties": true,    // enable computed object literal property names
+    "objectLiteralDuplicateProperties": false,  // enable duplicate object literal properties in strict mode
+    "objectLiteralShorthandMethods": false,     // enable object literal shorthand methods
+    "objectLiteralShorthandProperties": false,  // enable object literal shorthand properties
+    "octalLiterals": false,                     // enable octal literals
+    "regexUFlag": false,                        // enable the regular expression u flag
+    "regexYFlag": false,                        // enable the regular expression y flag
+    "restParams": true,                         // enable rest params
+    "spread": true,                             // enable the spread operator for arrays
+    "superInFunctions": true,                   // enable super references inside of functions
+    "templateStrings": true,                    // enable template strings
+    "unicodeCodePointEscapes": false,           // enable code point escapes
+    "globalReturn": false,                      // allow return statements in the global scope
+    "jsx": true,                                // enable JSX
+    "experimentalObjectRestSpread": false       // enable support for the experimental object rest/spread properties
+  },
+
+  "env": {
+    "node": true
+  },
+
+  "globals": {
+    // e.g. "angular": true
+  },
+
+  "plugins": [
+    // e.g. "react" (must run `npm install eslint-plugin-react` first)
+  ],
+
+  "rules": {
+    ////////// Possible Errors //////////
+
+    "no-comma-dangle": 0,         // disallow trailing commas in object literals
+
+
+    ////////// Stylistic Issues //////////
+
+    "quotes": [2, "single"],        // specify whether double or single quotes should be used
+    "semi": [2, "never"],           // require or disallow use of semicolons instead of ASI
+
+
+    ////////// ECMAScript 6 //////////
+
+    "no-var": 2
+  }
+}

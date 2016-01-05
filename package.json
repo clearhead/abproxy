@@ -36,6 +36,7 @@
     "babel-plugin-object-assign": "^1.2.1",
     "gulp": "^3.9.0",
     "gulp-babel": "^5.2.1",
+    "gulp-eslint": "^1.1.1",
     "gulp-sequence": "^0.4.1",
     "rimraf": "^2.4.2"
   }

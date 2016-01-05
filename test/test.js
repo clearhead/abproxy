@@ -1,3 +1,3 @@
-!(function() {
-  window.alert('Testing 123');
-})();
+;(function() {
+  window.alert('Testing 123')
+})()
