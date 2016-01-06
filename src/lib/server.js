@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import path from 'path'
 import http from 'http'
 import https from 'https'
 import connect from 'connect'
@@ -9,12 +10,15 @@ import proxyInjector from './proxy-injector'
 const app = connect()
 
 const proxy = httpProxy.createProxyServer({
-   target: 'https://nodejs.org',
+   target: 'https://jquery.com/',
    agent: https.globalAgent,
-   headers: { host: 'nodejs.org' },
+   headers: { host: 'jquery.com' },
 })
 
-app.use(proxyInjector('test/test.js'))
+const testFile = path.resolve(process.cwd(), './test/test.js')
+console.log(testFile)
+
+app.use(proxyInjector(testFile))
 
 app.use((req, res) => {
   proxy.web(req, res)

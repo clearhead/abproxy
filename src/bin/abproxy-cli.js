@@ -1,31 +1,50 @@
 #!/usr/bin/env node
 
-import program from 'commander'
-import rc from 'rc'
+import Liftoff from 'liftoff'
+import cli from 'commander'
 import pkg from '../../package.json'
-import path from 'path'
 import cp from 'child_process'
 
-const rcfilename = `.${ pkg.name }rc`
-const rcfile = path.resolve(process.cwd(), rcfilename)
-
-program
+cli
   .version(pkg.version)
-  .usage('[options] <file ...>')
+  .usage('[options]')
   .option('-p, --port <n>', 'The proxy port', Number, 8000)
-  .option('-c, --config', `Path to config file`)
-  .option('-r, --create-rc', `Create ${ rcfilename } file`, false)
+  .option('-r, --create-rc', `Create .abproxyrc file`, false)
   .parse(process.argv)
 
-if (program.createRc) {
+const abproxy = new Liftoff({
+  name: 'abproxy',
+  configName: '.abproxy',
+  extensions: {
+    'rc': null
+  },
+})
+
+abproxy.on('require', (name, module) => {
+  console.log('Requiring external module:', name, module)
+})
+
+abproxy.on('requireFail', (name, err) => {
+  console.log('Unable to require external module:', name, err)
+})
+
+abproxy.launch({}, invoke)
+
+function invoke(env) {
+  if (cli.createRc) promptForConig()
+  else if (env.configPath) spinup(env.configPath, cli.port)
+  else console.log('.abproxyrc file not found')
+}
+
+function promptForConig() {
   const rcpromptFile = path.resolve(__dirname, '../lib/rcprompt.js')
   const rcprompt = cp.fork(rcpromptFile)
 
   rcprompt.on('message', (msg) => {
     console.log(msg)
   })
-} else {
-  console.log(Object.keys(program))
 }
 
-export default program
+function spinup(config, port) {
+  console.log(config, port)
+}
