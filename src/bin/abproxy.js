@@ -10,6 +10,7 @@ cli
   .usage('[options]')
   .option('-p, --port <n>', 'The proxy port', Number, 8000)
   .option('-r, --create-rc', `Create .abproxyrc file`, false)
+  .option('--variation [type]', 'Specify variation to run [v1]', 'v1')
   .parse(process.argv)
 
 const abproxy = new Liftoff({
@@ -32,7 +33,7 @@ abproxy.launch({}, invoke)
 
 function invoke(env) {
   if (cli.createRc) promptForConig()
-  else if (env.configPath) spinup(env.configPath, cli.port)
+  else if (env.configPath) spinup(env.configPath, cli.port, cli.variation)
   else console.log('.abproxyrc file not found')
 }
 
