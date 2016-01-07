@@ -4,8 +4,10 @@
   "description": "Inject A/B tests into a proxied server response.",
   "main": "dist/index.js",
   "scripts": {
-    "start": "node dist/index.js"
-    "patch": "npm version patch && git push --follow-tags && npm publish"
+    "start": "node dist/index.js",
+    "compile": "babel -d dist/ src/",
+    "prepublish": "npm run compile",
+    "bump": "npm test && npm version patch -m 'bump to v%s' && npm publish && git push --follow-tags"
   },
   "bin": {
     "abproxy": "dist/bin/abproxy.js"
