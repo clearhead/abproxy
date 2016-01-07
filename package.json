@@ -28,6 +28,7 @@
     "jsonfile": "^2.2.1",
     "liftoff": "^2.2.0",
     "livereload": "^0.3.7",
+    "minimist": "^1.2.0",
     "rc": "^1.1.0"
   },
   "devDependencies": {

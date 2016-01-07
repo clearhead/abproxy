@@ -10,7 +10,7 @@ cli
   .version(pkg.version)
   .usage('[options]')
   .option('-r, --create-rc', `Create .abproxyrc file`, false)
-  .option('--variation [type]', 'Specify variation to run [v1]', 'v1')
+  .option('-v, --variation [type]', 'Specify variation to run [v1]', 'v1')
   .parse(process.argv)
 
 const abproxy = new Liftoff({
@@ -47,5 +47,13 @@ function promptForConfig() {
 }
 
 function spinupProxy(configPath, variation) {
-  console.log(configPath, variation)
+  const proxyServerPath = resolve(__dirname, '../lib/server.js')
+  const proxyServer = fork(proxyServerPath, [
+    `--configPath=${configPath}`,
+    `--variation=${variation}`,
+  ])
+
+  proxyServer.on('message', (msg) => {
+    console.log(msg)
+  })
 }
