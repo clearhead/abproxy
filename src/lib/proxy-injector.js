@@ -1,8 +1,9 @@
 import harmon from 'harmon'
 import loadFiles from './load-files'
+import jqWrapper from './jq-wrapper'
 
 function tagify(tag, contents) {
-  return `<${ tag }>${ contents }</${ tag }>`
+  return `<${ tag }>${ tag === 'script' ? jqWrapper(contents) : contents }</${ tag }>`
 }
 
 // Generate harmon select to append contents to a query stream
