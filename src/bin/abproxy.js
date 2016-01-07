@@ -2,13 +2,13 @@
 
 import Liftoff from 'liftoff'
 import cli from 'commander'
-import pkg from '../../package.json'
-import cp from 'child_process'
+import pkg from '../../package'
+import { resolve } from 'path'
+import { fork } from 'child_process'
 
 cli
   .version(pkg.version)
   .usage('[options]')
-  .option('-p, --port <n>', 'The proxy port', Number, 8000)
   .option('-r, --create-rc', `Create .abproxyrc file`, false)
   .option('--variation [type]', 'Specify variation to run [v1]', 'v1')
   .parse(process.argv)
@@ -32,20 +32,20 @@ abproxy.on('requireFail', (name, err) => {
 abproxy.launch({}, invoke)
 
 function invoke(env) {
-  if (cli.createRc) promptForConig()
-  else if (env.configPath) spinup(env.configPath, cli.port, cli.variation)
+  if (cli.createRc) promptForConfig()
+  else if (env.configPath) spinupProxy(env.configPath, cli.variation)
   else console.log('.abproxyrc file not found')
 }
 
-function promptForConig() {
-  const rcpromptFile = path.resolve(__dirname, '../lib/rcprompt.js')
-  const rcprompt = cp.fork(rcpromptFile)
+function promptForConfig() {
+  const rcpromptFile = resolve(__dirname, '../lib/rcprompt.js')
+  const rcprompt = fork(rcpromptFile)
 
   rcprompt.on('message', (msg) => {
     console.log(msg)
   })
 }
 
-function spinup(config, port) {
-  console.log(config, port)
+function spinupProxy(configPath, variation) {
+  console.log(configPath, variation)
 }
