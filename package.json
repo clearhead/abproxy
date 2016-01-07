@@ -10,7 +10,7 @@
     "bump": "npm version patch -m 'bump to v%s' && npm publish && git push --follow-tags"
   },
   "bin": {
-    "abproxy": "dist/bin/abproxy.js"
+    "abproxy": "./dist/bin/abproxy.js"
   },
   "keywords": [
     "proxy",
