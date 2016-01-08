@@ -1,6 +1,6 @@
 {
   "name": "abproxy",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Inject A/B tests into a proxied server response.",
   "main": "dist/index.js",
   "scripts": {
